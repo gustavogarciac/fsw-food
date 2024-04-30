@@ -1,6 +1,7 @@
 import { CategoryList, CategoryListSkeleton } from '@/components/category-list'
 import { Header } from '@/components/header'
-import { ProductList, ProductListSkeleton } from '@/components/product-list'
+import { ProductListSkeleton } from '@/components/product-list'
+import { RecommendedProducts } from '@/components/recommended-products'
 import { SearchInput } from '@/components/search-input'
 import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
@@ -42,7 +43,7 @@ export default function Home() {
         </div>
 
         <Suspense fallback={<ProductListSkeleton />}>
-          <ProductList />
+          <RecommendedProducts />
         </Suspense>
       </div>
     </main>

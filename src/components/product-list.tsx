@@ -1,27 +1,18 @@
-import { prisma } from '@/lib/prisma'
 import React from 'react'
 import { ProductItem } from './product-item'
 import { Skeleton } from './ui/skeleton'
+import { Prisma } from '@prisma/client'
 
-const getProducts = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
-  const products = await prisma.product.findMany({
-    where: {
-      discountPercentage: {
-        gt: 0,
-      },
-    },
-    take: 10,
+interface ProductListProps {
+  products: Prisma.ProductGetPayload<{
     include: {
       restaurant: {
         select: {
-          name: true,
-        },
-      },
-    },
-  })
-
-  return products
+          name: true
+        }
+      }
+    }
+  }>[]
 }
 
 export const ProductListSkeleton = async () => {
@@ -46,9 +37,7 @@ export const ProductListSkeleton = async () => {
   )
 }
 
-export const ProductList = async () => {
-  const products = await getProducts()
-
+export const ProductList = async ({ products }: ProductListProps) => {
   return (
     <div className="flex overflow-x-scroll gap-4 scrollbar-hidden px-5">
       {products.map((product) => (
