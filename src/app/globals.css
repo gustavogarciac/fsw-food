@@ -13,7 +13,7 @@
   --primary-foreground: 0 0% 100%;
   --secondary: 356 30% 90%;
   --secondary-foreground: 0 0% 0%;
-  --muted: 318 30% 95%;
+  --muted: 318 30% 90%;
   --muted-foreground: 225 8% 53%;
   --accent: 318 30% 90%;
   --accent-foreground: 356 5% 15%;
@@ -54,6 +54,6 @@
   }
 
   body {
-    @apply text-foreground antialiased;
+    @apply text-foreground bg-zinc-100 antialiased;
   }
 }

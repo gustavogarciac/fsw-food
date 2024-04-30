@@ -1,6 +1,7 @@
-import { CategoryList } from '@/components/category-list'
+import { CategoryList, CategoryListSkeleton } from '@/components/category-list'
 import { Header } from '@/components/header'
 import { SearchInput } from '@/components/search-input'
+import { Suspense } from 'react'
 
 export default function Home() {
   return (
@@ -11,7 +12,11 @@ export default function Home() {
         <SearchInput />
       </div>
 
-      <CategoryList />
+      <Suspense fallback={<CategoryListSkeleton />}>
+        <div className="px-5 pt-6">
+          <CategoryList />
+        </div>
+      </Suspense>
     </main>
   )
 }
