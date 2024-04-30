@@ -56,4 +56,10 @@
   body {
     @apply text-foreground bg-zinc-100 antialiased;
   }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-scrollbar: hidden;
+  }
 }

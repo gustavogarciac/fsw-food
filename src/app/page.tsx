@@ -1,6 +1,9 @@
 import { CategoryList, CategoryListSkeleton } from '@/components/category-list'
 import { Header } from '@/components/header'
+import { ProductList, ProductListSkeleton } from '@/components/product-list'
 import { SearchInput } from '@/components/search-input'
+import { Button } from '@/components/ui/button'
+import { ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { Suspense } from 'react'
 
@@ -28,6 +31,19 @@ export default function Home() {
           className="w-full h-auto object-contain"
           quality={100}
         />
+      </div>
+
+      <div className="pt-6 space-y-3">
+        <div className="px-5 flex items-center justify-between gap-2">
+          <h2 className="font-semibold">Pedidos Recomendados</h2>
+          <Button variant="link" className="text-primary p-0 h-fit">
+            Ver todos <ChevronRight size={16} />
+          </Button>
+        </div>
+
+        <Suspense fallback={<ProductListSkeleton />}>
+          <ProductList />
+        </Suspense>
       </div>
     </main>
   )
