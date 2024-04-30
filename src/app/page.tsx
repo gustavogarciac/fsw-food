@@ -1,11 +1,12 @@
 import { CategoryList, CategoryListSkeleton } from '@/components/category-list'
 import { Header } from '@/components/header'
 import { ProductListSkeleton } from '@/components/product-list'
+import { PromoBanner } from '@/components/promo-banner'
 import { RecommendedProducts } from '@/components/recommended-products'
 import { SearchInput } from '@/components/search-input'
 import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
-import Image from 'next/image'
+
 import { Suspense } from 'react'
 
 export default function Home() {
@@ -24,13 +25,9 @@ export default function Home() {
       </Suspense>
 
       <div className="px-5 pt-6">
-        <Image
-          src="/promo-banner-01.png"
+        <PromoBanner
           alt="Até 30% de desconto em pizzas!"
-          width={1440}
-          height={400}
-          className="w-full h-auto object-contain"
-          quality={100}
+          src="/promo-banner-01.png"
         />
       </div>
 
@@ -45,6 +42,13 @@ export default function Home() {
         <Suspense fallback={<ProductListSkeleton />}>
           <RecommendedProducts />
         </Suspense>
+      </div>
+
+      <div className="px-5 pt-6">
+        <PromoBanner
+          alt="A partir de 17,90 em lanches!"
+          src="/promo-banner-02.png"
+        />
       </div>
     </main>
   )
