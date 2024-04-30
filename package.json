@@ -12,6 +12,9 @@
   "prisma": {
     "seed": "ts-node ./prisma/seed.ts"
   },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.12.1",
     "@radix-ui/react-slot": "^1.0.2",
