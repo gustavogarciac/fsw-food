@@ -1,3 +1,4 @@
+import { CategoryList } from '@/components/category-list'
 import { Header } from '@/components/header'
 import { SearchInput } from '@/components/search-input'
 
@@ -9,6 +10,8 @@ export default function Home() {
       <div className="px-5 pt-6">
         <SearchInput />
       </div>
+
+      <CategoryList />
     </main>
   )
 }
