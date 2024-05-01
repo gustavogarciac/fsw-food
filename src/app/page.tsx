@@ -3,6 +3,10 @@ import { Header } from '@/components/header'
 import { ProductListSkeleton } from '@/components/product-list'
 import { PromoBanner } from '@/components/promo-banner'
 import { RecommendedProducts } from '@/components/recommended-products'
+import {
+  RestaurantList,
+  RestaurantListSkeleton,
+} from '@/components/restaurant-list'
 import { SearchInput } from '@/components/search-input'
 import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
@@ -49,6 +53,19 @@ export default function Home() {
           alt="A partir de 17,90 em lanches!"
           src="/promo-banner-02.png"
         />
+      </div>
+
+      <div className="pt-6 space-y-3">
+        <div className="px-5 flex items-center justify-between gap-2">
+          <h2 className="font-semibold">Restaurantes Recomendados</h2>
+          <Button variant="link" className="text-primary p-0 h-fit">
+            Ver todos <ChevronRight size={16} />
+          </Button>
+        </div>
+
+        <Suspense fallback={<RestaurantListSkeleton />}>
+          <RestaurantList />
+        </Suspense>
       </div>
     </main>
   )
