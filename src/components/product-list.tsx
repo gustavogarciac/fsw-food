@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductItem } from './product-item'
 import { Skeleton } from './ui/skeleton'
 import { Prisma } from '@prisma/client'
+import { cn } from '@/lib/utils'
 
 interface ProductListProps {
   products: Prisma.ProductGetPayload<{
@@ -13,6 +14,7 @@ interface ProductListProps {
       }
     }
   }>[]
+  containerClasses?: string
 }
 
 export const ProductListSkeleton = async () => {
@@ -37,9 +39,17 @@ export const ProductListSkeleton = async () => {
   )
 }
 
-export const ProductList = async ({ products }: ProductListProps) => {
+export const ProductList = async ({
+  products,
+  containerClasses,
+}: ProductListProps) => {
   return (
-    <div className="flex overflow-x-scroll gap-4 scrollbar-hidden px-5">
+    <div
+      className={cn(
+        'flex overflow-x-scroll gap-4 scrollbar-hidden px-5',
+        containerClasses,
+      )}
+    >
       {products.map((product) => (
         <ProductItem product={product} key={product.id} />
       ))}
