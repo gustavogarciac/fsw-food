@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import {
   calculateProductTotalPrice,
   formatCurrency,
@@ -18,13 +19,27 @@ type Props = {
       }
     }
   }>
+  containerClasses?: string
+  imageContainerClasses?: string
 }
 
-export const ProductItem = ({ product }: Props) => {
+export const ProductItem = ({
+  product,
+  containerClasses,
+  imageContainerClasses,
+}: Props) => {
   return (
-    <Link className="min-w-[150px]" href={`/products/${product.id}`}>
-      <div className="w-full space-y-2 min-w-[150px]">
-        <div className="relative overflow-hidden rounded-md w-full h-36">
+    <Link
+      className={cn('min-w-[150px]', containerClasses)}
+      href={`/products/${product.id}`}
+    >
+      <div className="w-full space-y-2 aspect-square">
+        <div
+          className={cn(
+            'relative overflow-hidden rounded-md w-full h-36',
+            imageContainerClasses,
+          )}
+        >
           <Image
             className="w-full aspect-square object-cover"
             alt={product.name}
