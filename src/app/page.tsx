@@ -40,7 +40,12 @@ export default function Home() {
         <div className="px-5 flex items-center justify-between gap-2">
           <h2 className="font-semibold">Pedidos Recomendados</h2>
           <Button variant="link" className="text-primary p-0 h-fit">
-            Ver todos <ChevronRight size={16} />
+            <Link
+              className="flex flex-row gap-1 items-center"
+              href={'/products/recommended'}
+            >
+              Ver todos <ChevronRight size={16} />
+            </Link>
           </Button>
         </div>
 
