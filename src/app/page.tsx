@@ -10,6 +10,7 @@ import {
 import { SearchInput } from '@/components/search-input'
 import { Button } from '@/components/ui/button'
 import { ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 
 import { Suspense } from 'react'
 
@@ -59,7 +60,12 @@ export default function Home() {
         <div className="px-5 flex items-center justify-between gap-2">
           <h2 className="font-semibold">Restaurantes Recomendados</h2>
           <Button variant="link" className="text-primary p-0 h-fit">
-            Ver todos <ChevronRight size={16} />
+            <Link
+              href={'/restaurants/recommended'}
+              className="flex items-center gap-1"
+            >
+              Ver todos <ChevronRight size={16} />
+            </Link>
           </Button>
         </div>
 
