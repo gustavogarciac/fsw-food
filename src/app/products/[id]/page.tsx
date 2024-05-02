@@ -78,6 +78,10 @@ async function ProductIdPage({ params }: { params: { id: string } }) {
         product={product}
         complementaryProducts={similarProducts}
       />
+
+      <div className="px-5 mt-8">
+        <Button className="w-full font-semibold">Adicionar à sacola</Button>
+      </div>
     </div>
   )
 }

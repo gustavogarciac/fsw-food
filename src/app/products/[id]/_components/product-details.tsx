@@ -1,14 +1,14 @@
-import { Card, CardContent } from '@/components/ui/card'
 import {
   calculateProductTotalPrice,
   formatCurrency,
 } from '@/utils/get-product-total-price'
 import { Prisma } from '@prisma/client'
-import { ArrowDown, BikeIcon, ClockIcon } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import { ProductCounter } from './product-counter'
 import { ProductList, ProductListSkeleton } from '@/components/product-list'
 import { Suspense } from 'react'
+import { Metrics } from '@/components/metrics'
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -71,26 +71,10 @@ export const ProductDetails = ({
       </div>
 
       <div className="px-5">
-        <Card className="mt-4 bg-transparent">
-          <CardContent className="p-2">
-            <div className="grid grid-cols-2">
-              <div className="flex flex-col gap-2 items-center justify-center">
-                <BikeIcon className="w-4 h-4" />
-                <span className="text-muted-foreground text-sm font-semibold">
-                  {Number(product.restaurant.deliveryFee) > 0
-                    ? formatCurrency(Number(product.restaurant.deliveryFee))
-                    : 'Grátis'}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 items-center justify-center">
-                <ClockIcon className="w-4 h-4" />
-                <span className="text-muted-foreground">
-                  {product.restaurant.deliveryTimeMinutes} min
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <Metrics
+          deliveryFee={Number(product.restaurant.deliveryFee)}
+          deliveryTimeMinutes={product.restaurant.deliveryTimeMinutes}
+        />
       </div>
 
       <div className="flex flex-col gap-1 mt-4 px-5">
