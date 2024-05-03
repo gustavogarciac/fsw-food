@@ -5,7 +5,6 @@ import {
 import { Prisma } from '@prisma/client'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
-import { ProductCounter } from './product-counter'
 import { ProductList, ProductListSkeleton } from '@/components/product-list'
 import { Suspense } from 'react'
 import { Metrics } from '@/components/metrics'
@@ -66,8 +65,6 @@ export const ProductDetails = ({
             De: {formatCurrency(Number(product.price))}
           </span>
         </div>
-
-        <ProductCounter />
       </div>
 
       <div className="px-5">
