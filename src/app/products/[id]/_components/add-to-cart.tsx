@@ -9,11 +9,15 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { useCartStore } from '@/stores/cart-store'
-import { Product } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import React from 'react'
 
 interface AddToCartButtonProps {
-  product: Product
+  product: Prisma.ProductGetPayload<{
+    include: {
+      restaurant: true
+    }
+  }>
 }
 
 export const AddToCartButton = ({ product }: AddToCartButtonProps) => {
