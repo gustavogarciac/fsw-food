@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import { ProductDetails } from './_components/product-details'
+import { AddToCartButton } from './_components/add-to-cart'
 
 async function getProductById(id: string) {
   const product = await prisma.product.findUnique({
@@ -80,7 +81,7 @@ async function ProductIdPage({ params }: { params: { id: string } }) {
       />
 
       <div className="px-5 mt-8">
-        <Button className="w-full font-semibold">Adicionar à sacola</Button>
+        <AddToCartButton product={product} />
       </div>
     </div>
   )
