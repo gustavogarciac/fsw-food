@@ -1,3 +1,4 @@
+import { Container } from '@/components/container'
 import { Header } from '@/components/header'
 import { ProductItem } from '@/components/product-item'
 import { prisma } from '@/lib/prisma'
@@ -30,12 +31,12 @@ const RecommendedProductsPage = async () => {
   if (!products) return null
 
   return (
-    <>
+    <Container>
       <Header />
       <div className="p-5">
         <h2 className="text-lg font-bold pt-6">Pedidos Recomendados</h2>
 
-        <div className="grid grid-cols-2 gap-6 w-full mt-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full mt-6">
           {products.map((product) => (
             <ProductItem
               product={product}
@@ -46,7 +47,7 @@ const RecommendedProductsPage = async () => {
           ))}
         </div>
       </div>
-    </>
+    </Container>
   )
 }
 
