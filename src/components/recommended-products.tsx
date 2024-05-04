@@ -10,7 +10,7 @@ const getProducts = async () => {
         gt: 0,
       },
     },
-    take: 10,
+    take: 12,
     include: {
       restaurant: {
         select: {

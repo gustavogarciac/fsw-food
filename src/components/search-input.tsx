@@ -5,8 +5,17 @@ import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
-export const SearchInput = () => {
+interface SearchInputProps {
+  containerClasses?: string
+  inputClasses?: string
+}
+
+export const SearchInput = ({
+  containerClasses,
+  inputClasses,
+}: SearchInputProps) => {
   const [search, setSearch] = useState('')
   const router = useRouter()
 
@@ -29,13 +38,13 @@ export const SearchInput = () => {
   }
 
   return (
-    <div className="flex gap-2">
+    <div className={cn('flex gap-2', containerClasses)}>
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={handleInputKeyDown}
         placeholder="Buscar restaurantes"
-        className="border-none bg-white"
+        className={cn('border-none bg-white', inputClasses)}
       />
 
       <Button size="icon" className="size-10" onClick={handleSearchSubmit}>

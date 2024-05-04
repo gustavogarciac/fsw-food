@@ -46,7 +46,7 @@ export const ProductList = async ({
   return (
     <div
       className={cn(
-        'flex overflow-x-scroll gap-4 scrollbar-hidden px-5',
+        'flex overflow-x-scroll gap-4 scrollbar-hidden px-5 md:grid md:grid-cols-6',
         containerClasses,
       )}
     >
