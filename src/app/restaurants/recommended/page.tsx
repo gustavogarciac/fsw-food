@@ -1,3 +1,4 @@
+import { Container } from '@/components/container'
 import { Header } from '@/components/header'
 import { RestaurantItem } from '@/components/restaurant-item'
 import { prisma } from '@/lib/prisma'
@@ -17,12 +18,12 @@ const RecommendedRestaurants = async () => {
   const restaurants = await getRecommendedRestaurants()
 
   return (
-    <>
+    <Container>
       <Header />
       <div className="p-5">
         <h2 className="text-lg font-bold pt-6">Restaurantes Recomendados</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-6">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               restaurant={restaurant}
@@ -33,7 +34,7 @@ const RecommendedRestaurants = async () => {
           ))}
         </div>
       </div>
-    </>
+    </Container>
   )
 }
 export default RecommendedRestaurants
