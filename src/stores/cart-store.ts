@@ -5,11 +5,7 @@ import { create } from 'zustand'
 export interface CartProduct
   extends Prisma.ProductGetPayload<{
     include: {
-      restaurant: {
-        select: {
-          deliveryFee: true
-        }
-      }
+      restaurant: true
     }
   }> {
   quantity: number
@@ -74,6 +70,15 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const existingItem = currentItems.find((item) => item.id === product.id)
 
     if (existingItem) return
+
+    const hasDifferentRestaurantProduct = currentItems.some((item) => {
+      return item.restaurantId !== product.restaurantId
+    })
+
+    if (hasDifferentRestaurantProduct) {
+      set({ items: [product] })
+      return
+    }
 
     set({ items: [...currentItems, { ...product }] })
   },

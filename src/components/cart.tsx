@@ -7,6 +7,7 @@ import { Card, CardContent } from './ui/card'
 import { formatCurrency } from '@/utils/get-product-total-price'
 import { Separator } from './ui/separator'
 import { Button } from './ui/button'
+import Link from 'next/link'
 
 export const Cart = () => {
   const {
@@ -14,21 +15,38 @@ export const Cart = () => {
     calculateSubTotalPrice,
     calculateTotalDiscount,
     calculateTotalPrice,
+    onClose,
   } = useCartStore()
 
   const subTotalPrice = calculateSubTotalPrice()
   const totalDiscount = calculateTotalDiscount()
   const totalPrice = calculateTotalPrice()
 
+  if (productsInCart.length === 0) {
+    return (
+      <div className="h-full flex flex-col pt-5 pb-7">
+        <div className="flex-auto flex items-center justify-center">
+          <span className="text-muted-foreground">Sua sacola está vazia</span>
+        </div>
+
+        <Button asChild>
+          <Link href="/" onClick={onClose}>
+            Encontrar produtos
+          </Link>
+        </Button>
+      </div>
+    )
+  }
+
   return (
-    <div>
-      <div className="space-y-4">
+    <div className="h-full flex flex-col pt-5 pb-7">
+      <div className="space-y-4 flex-auto overflow-y-auto pr-2">
         {productsInCart.map((product) => (
           <CartItem cartProduct={product} key={product.id} />
         ))}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <Card>
           <CardContent className="p-5">
             <div className="justify-between flex items-center text-xs py-2">
@@ -70,7 +88,7 @@ export const Cart = () => {
         </Card>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-7">
         <Button className="w-full">Finalizar pedido</Button>
       </div>
     </div>
