@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { ProductList, ProductListSkeleton } from '@/components/product-list'
 import { Suspense } from 'react'
 import { Metrics } from '@/components/metrics'
+import Link from 'next/link'
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -37,9 +38,12 @@ export const ProductDetails = ({
           height={24}
           className="rounded-full aspect-square object-cover"
         />
-        <span className="text-sm text-muted-foreground">
+        <Link
+          href={`/restaurants/${product.restaurant.id}`}
+          className="text-sm text-muted-foreground"
+        >
           {product.restaurant.name}
-        </span>
+        </Link>
       </div>
 
       <h1 className="font-semibold text-xl mb-3 mt-1 px-5">{product.name}</h1>

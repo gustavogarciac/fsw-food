@@ -1,3 +1,4 @@
+import { CartBanner } from '@/components/cart-banner'
 import { CategoryItem } from '@/components/category-item'
 import { Metrics } from '@/components/metrics'
 import { ProductList, ProductListSkeleton } from '@/components/product-list'
@@ -132,6 +133,8 @@ const RestaurantIdPage = async ({ params }: { params: { id: string } }) => {
           </Suspense>
         </div>
       ))}
+
+      <CartBanner restaurant={restaurant} />
     </div>
   )
 }
