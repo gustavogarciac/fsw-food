@@ -7,6 +7,9 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import { ProductDetails } from './_components/product-details'
 import { AddToCartButton } from './_components/add-to-cart'
+import { Container } from '@/components/container'
+import { Header } from '@/components/header'
+import { SearchInput } from '@/components/search-input'
 
 async function getProductById(id: string) {
   const product = await prisma.product.findUnique({
@@ -54,35 +57,43 @@ async function ProductIdPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-full">
-      <div className="relative w-full h-80">
-        <Image
-          src={product.imageUrl}
-          alt={product.name}
-          className="h-full w-full object-cover"
-          width={400}
-          height={400}
-          quality={100}
+      <Container>
+        <div className="hidden md:block">
+          <Header />
+          <div className="px-5 pt-6">
+            <SearchInput />
+          </div>
+        </div>
+
+        <div className="relative w-full h-80 md:hidden">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            className="h-full w-full object-cover"
+            width={400}
+            height={400}
+            quality={100}
+          />
+          <Button
+            className="absolute rounded-full bg-white text-foreground top-2 left-2 p-0 hover:bg-muted"
+            size={'icon'}
+            asChild
+          >
+            <Link href="/">
+              <ChevronLeftIcon className="w-6 h-6" />
+            </Link>
+          </Button>
+        </div>
+
+        <ProductDetails
+          product={product}
+          complementaryProducts={similarProducts}
         />
-      </div>
 
-      <Button
-        className="absolute rounded-full bg-white text-foreground top-2 left-2 p-0 hover:bg-muted"
-        size={'icon'}
-        asChild
-      >
-        <Link href="/">
-          <ChevronLeftIcon className="w-6 h-6" />
-        </Link>
-      </Button>
-
-      <ProductDetails
-        product={product}
-        complementaryProducts={similarProducts}
-      />
-
-      <div className="px-5 mt-8">
-        <AddToCartButton product={product} />
-      </div>
+        <div className="px-5 mt-8 md:hidden">
+          <AddToCartButton product={product} />
+        </div>
+      </Container>
     </div>
   )
 }
