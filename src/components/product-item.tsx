@@ -33,7 +33,7 @@ export const ProductItem = ({
       className={cn('min-w-[150px]', containerClasses)}
       href={`/products/${product.id}`}
     >
-      <div className="w-full space-y-2 aspect-square">
+      <div className="w-full space-y-2">
         <div
           className={cn(
             'relative overflow-hidden rounded-md w-full h-36',
@@ -43,8 +43,8 @@ export const ProductItem = ({
           <Image
             className="w-full aspect-square object-cover"
             alt={product.name}
-            width={144}
-            height={144}
+            width={300}
+            height={300}
             quality={100}
             src={product.imageUrl}
           />

@@ -1,3 +1,4 @@
+import { Container } from '@/components/container'
 import { Header } from '@/components/header'
 import { ProductItem } from '@/components/product-item'
 import { prisma } from '@/lib/prisma'
@@ -39,12 +40,12 @@ const CategoriesPage = async ({ params }: { params: { id: string } }) => {
   if (!category) redirect('/')
 
   return (
-    <>
+    <Container>
       <Header />
       <div className="p-5">
         <h2 className="text-lg font-bold pt-6">{category.name}</h2>
 
-        <div className="grid grid-cols-2 gap-6 w-full mt-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full mt-6">
           {category.products.map((product) => (
             <ProductItem
               product={product}
@@ -54,7 +55,7 @@ const CategoriesPage = async ({ params }: { params: { id: string } }) => {
           ))}
         </div>
       </div>
-    </>
+    </Container>
   )
 }
 
