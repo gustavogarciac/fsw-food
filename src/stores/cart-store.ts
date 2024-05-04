@@ -50,18 +50,26 @@ export const useCartStore = create<CartStore>((set, get) => ({
       return 0
     }
 
-    const subTotal = items.reduce((acc, item) => {
-      const itemPrice = calculateProductTotalPrice(item) * item.quantity
-      return acc + itemPrice
-    }, 0)
+    const subTotal =
+      items.reduce((acc, item) => {
+        const itemPrice = calculateProductTotalPrice(item) * item.quantity
+        return acc + itemPrice
+      }, 0) + Number(items?.[0]?.restaurant?.deliveryFee)
 
     return subTotal
   },
   calculateTotalDiscount: () => {
+    const items = get().items
     const calculateTotalPrice = get().calculateTotalPrice()
     const calculateSubTotalPrice = get().calculateSubTotalPrice()
 
-    return calculateSubTotalPrice - calculateTotalPrice
+    console.log(items?.[0]?.restaurant?.deliveryFee)
+
+    return (
+      calculateSubTotalPrice -
+      calculateTotalPrice +
+      Number(items?.[0]?.restaurant?.deliveryFee)
+    )
   },
   onOpen: () => set({ open: true }),
   onClose: () => set({ open: false }),
