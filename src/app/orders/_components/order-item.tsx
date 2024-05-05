@@ -7,6 +7,8 @@ import { Prisma } from '@prisma/client'
 import { ChevronRightIcon } from 'lucide-react'
 import React from 'react'
 import { OrderStatusLabel } from './order-status'
+import Link from 'next/link'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -42,8 +44,11 @@ export const OrderItem = ({ order }: OrderItemProps) => {
             </span>
           </div>
 
-          <Button variant={'ghost'} size="icon">
-            <ChevronRightIcon className="w-5 h-5" />
+          <Button variant={'ghost'} size="icon" asChild>
+            <Link href={`/restaurants/${order.restaurantId}`}>
+              <span className="sr-only">Visitar restaurante</span>
+              <ChevronRightIcon className="w-5 h-5" />
+            </Link>
           </Button>
         </div>
 
@@ -51,7 +56,7 @@ export const OrderItem = ({ order }: OrderItemProps) => {
           <Separator />
         </div>
 
-        <div>
+        <div className="space-y-2">
           {order.orderProducts.map((product) => (
             <div className="flex items-center gap-2" key={product.id}>
               <div className="w-5 h-5 rounded-full flex items-center justify-center bg-muted">
@@ -86,5 +91,40 @@ export const OrderItem = ({ order }: OrderItemProps) => {
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+export const OrderItemSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-3 rounded-lg border border-border p-5">
+      <Skeleton className="h-4 w-1/6" />
+
+      <div className="flex flex-row items-center gap-2">
+        <Skeleton className="w-8 h-8" />
+        <Skeleton className="w-1/4 h-4" />
+      </div>
+
+      <div className="py-3">
+        <Separator />
+      </div>
+
+      <div className="space-y-2">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div className="flex items-center gap-2" key={index}>
+            <Skeleton className="w-5 h-5 rounded-full" />
+            <Skeleton className="w-1/4 h-4" />
+          </div>
+        ))}
+      </div>
+
+      <div className="py-3">
+        <Separator />
+      </div>
+
+      <div className="flex flex-row justify-between items-center">
+        <Skeleton className="w-1/4 h-4" />
+        <Skeleton className="w-1/4 h-4" />
+      </div>
+    </div>
   )
 }

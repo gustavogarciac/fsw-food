@@ -61,6 +61,14 @@ export const Cart = () => {
         user: {
           connect: { id: userData.user.id },
         },
+        orderProducts: {
+          createMany: {
+            data: productsInCart.map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
+          },
+        },
       })
 
       removeAll()

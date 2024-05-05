@@ -46,7 +46,8 @@ model Product {
   categoryId String   @map("category_id")
   category   Category @relation(fields: [categoryId], references: [id])
 
-  orders Order[]
+  orders        Order[]
+  orderProducts OrderProduct[]
 
   @@map("products")
 }
@@ -59,20 +60,33 @@ enum OrderStatus {
   CANCELLED
 }
 
+model OrderProduct {
+  id String @id @default(uuid())
+
+  orderId String @map("order_id")
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
+
+  quantity Int
+}
+
 model Order {
-  id                  String      @id @default(uuid())
-  userId              String      @map("user_id")
-  user                User        @relation(fields: [userId], references: [id])
+  id                  String         @id @default(uuid())
+  userId              String         @map("user_id")
+  user                User           @relation(fields: [userId], references: [id])
   products            Product[]
-  restaurant          Restaurant  @relation(fields: [restaurantId], references: [id])
-  restaurantId        String      @map("restaurant_id")
-  deliveryFee         Decimal     @map("delivery_fee") @db.Decimal(10, 2)
-  deliveryTimeMinutes Int         @map("delivery_time_minutes")
-  subtotalPrice       Decimal     @map("subtotal_price") @db.Decimal(10, 2)
-  totalPrice          Decimal     @map("total_price") @db.Decimal(10, 2)
-  totalDiscounts      Decimal     @map("total_discounts") @db.Decimal(10, 2)
+  restaurant          Restaurant     @relation(fields: [restaurantId], references: [id])
+  restaurantId        String         @map("restaurant_id")
+  deliveryFee         Decimal        @map("delivery_fee") @db.Decimal(10, 2)
+  deliveryTimeMinutes Int            @map("delivery_time_minutes")
+  subtotalPrice       Decimal        @map("subtotal_price") @db.Decimal(10, 2)
+  totalPrice          Decimal        @map("total_price") @db.Decimal(10, 2)
+  totalDiscounts      Decimal        @map("total_discounts") @db.Decimal(10, 2)
   status              OrderStatus
-  createdAt           DateTime    @default(now())
+  createdAt           DateTime       @default(now())
+  orderProducts       OrderProduct[]
 
   @@map("orders")
 }
