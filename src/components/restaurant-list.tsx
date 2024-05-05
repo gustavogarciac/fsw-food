@@ -2,6 +2,8 @@ import React from 'react'
 import { prisma } from '../lib/prisma'
 import { RestaurantItem } from './restaurant-item'
 import { Skeleton } from './ui/skeleton'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
 async function getRestaurantList() {
   await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -32,11 +34,18 @@ export const RestaurantListSkeleton = () => {
 }
 
 export const RestaurantList = async () => {
+  const session = await getServerSession(authOptions)
   const restaurants = await getRestaurantList()
+
   return (
     <div className="flex gap-4 overflow-x-scroll px-5 scrollbar-hidden md:grid md:grid-cols-2 lg:grid-cols-3">
       {restaurants.map((restaurant) => (
-        <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+        <RestaurantItem
+          key={restaurant.id}
+          restaurant={restaurant}
+          userId={session?.user.id}
+          appearAsFavorite={false}
+        />
       ))}
     </div>
   )

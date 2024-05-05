@@ -23,7 +23,7 @@ const RecommendedRestaurants = async () => {
       <div className="p-5">
         <h2 className="text-lg font-bold pt-6">Restaurantes Recomendados</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-6">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               restaurant={restaurant}
