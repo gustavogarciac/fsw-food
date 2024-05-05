@@ -1,4 +1,4 @@
-import { LogInIcon, MenuIcon } from 'lucide-react'
+import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import { Button } from './ui/button'
@@ -13,6 +13,7 @@ import {
 import { Separator } from './ui/separator'
 import { MenuNavigation } from './menu-navigation'
 import { prisma } from '@/lib/prisma'
+import { SignInHeader } from './sign-in-header'
 
 async function getCategories() {
   const categories = await prisma.category.findMany()
@@ -51,13 +52,7 @@ export const Header = async () => {
           </SheetHeader>
 
           <div className="mt-4">
-            <div className="flex flex-row justify-between items-center mb-4">
-              <span className="font-bold">Olá! Faça seu login.</span>
-              <Button size={'icon'}>
-                <span className="sr-only">Fazer login</span>
-                <LogInIcon className="h-6 w-6" />
-              </Button>
-            </div>
+            <SignInHeader />
 
             <Separator />
 
