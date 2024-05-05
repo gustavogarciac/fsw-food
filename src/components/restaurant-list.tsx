@@ -34,7 +34,7 @@ export const RestaurantListSkeleton = () => {
 export const RestaurantList = async () => {
   const restaurants = await getRestaurantList()
   return (
-    <div className="flex gap-4 overflow-x-scroll px-5 scrollbar-hidden md:grid md:grid-cols-3">
+    <div className="flex gap-4 overflow-x-scroll px-5 scrollbar-hidden md:grid md:grid-cols-2 lg:grid-cols-3">
       {restaurants.map((restaurant) => (
         <RestaurantItem key={restaurant.id} restaurant={restaurant} />
       ))}
