@@ -12,17 +12,17 @@ const navigationList = [
   {
     label: 'Início',
     href: '/',
-    icon: <HomeIcon className="h-6 w-6" />,
+    icon: <HomeIcon className="h-4 w-4" />,
   },
   {
     label: 'Meus Pedidos',
     href: '/orders',
-    icon: <Receipt className="h-6 w-6" />,
+    icon: <Receipt className="h-4 w-4" />,
   },
   {
     label: 'Restaurantes Favoritos',
     href: '/restaurants/favorites',
-    icon: <HeartIcon className="h-6 w-6" />,
+    icon: <HeartIcon className="h-4 w-4" />,
   },
 ]
 
@@ -35,7 +35,7 @@ export const MenuNavigation = ({ categories }: MenuNavigationProps) => {
 
   return (
     <nav>
-      <ul className="space-y-2 mt-4">
+      <ul className="space-y-2 my-4">
         {navigationList.map((item) => (
           <li key={item.label}>
             <Link
@@ -46,7 +46,7 @@ export const MenuNavigation = ({ categories }: MenuNavigationProps) => {
               )}
             >
               {item.icon}
-              <span className="text-sm">{item.label}</span>
+              <span className="text-xs">{item.label}</span>
             </Link>
           </li>
         ))}
@@ -66,7 +66,7 @@ export const MenuNavigation = ({ categories }: MenuNavigationProps) => {
                   'bg-primary text-white',
               )}
             >
-              <span>{category.name}</span>
+              <span className="text-xs">{category.name}</span>
             </Link>
           </li>
         ))}
