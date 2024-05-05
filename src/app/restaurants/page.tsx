@@ -1,3 +1,4 @@
+import { Container } from '@/components/container'
 import { Header } from '@/components/header'
 import { RestaurantItem } from '@/components/restaurant-item'
 import { SearchInput } from '@/components/search-input'
@@ -26,7 +27,7 @@ const RestaurantsPage = async ({
   const restaurants = await getRestaurants(searchParams.name)
 
   return (
-    <>
+    <Container>
       <Header />
       <div className="px-5 pt-6">
         <SearchInput />
@@ -36,7 +37,7 @@ const RestaurantsPage = async ({
           Resultado para a pesquisa: {searchParams.name ?? 'Todos'}...
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 w-full mt-6">
           {restaurants.length > 0 ? (
             restaurants.map((restaurant) => (
               <RestaurantItem
@@ -53,7 +54,7 @@ const RestaurantsPage = async ({
           )}
         </div>
       </div>
-    </>
+    </Container>
   )
 }
 
