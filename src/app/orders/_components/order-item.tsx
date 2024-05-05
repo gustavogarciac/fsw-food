@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -9,6 +11,8 @@ import React from 'react'
 import { OrderStatusLabel } from './order-status'
 import Link from 'next/link'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useCartStore } from '@/stores/cart-store'
+import { useRouter } from 'next/navigation'
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -24,6 +28,21 @@ interface OrderItemProps {
 }
 
 export const OrderItem = ({ order }: OrderItemProps) => {
+  const { addItem } = useCartStore()
+  const router = useRouter()
+
+  function handleRedoOrderClick() {
+    for (const orderProduct of order.orderProducts) {
+      addItem({
+        ...orderProduct.product,
+        restaurant: order.restaurant,
+        quantity: orderProduct.quantity,
+      })
+    }
+
+    router.push(`/restaurants/${order.restaurantId}`)
+  }
+
   return (
     <Card>
       <CardContent className="p-5 space-y-3">
@@ -85,6 +104,7 @@ export const OrderItem = ({ order }: OrderItemProps) => {
             size="sm"
             variant="ghost"
             disabled={order.status !== 'COMPLETED'}
+            onClick={handleRedoOrderClick}
           >
             Repetir pedido
           </Button>
