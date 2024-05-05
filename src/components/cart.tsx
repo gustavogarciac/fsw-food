@@ -22,11 +22,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from './ui/alert-dialog'
+import { toast } from './ui/use-toast'
+import { ToastAction } from './ui/toast'
+import { useRouter } from 'next/navigation'
 
 export const Cart = () => {
   const { data: userData } = useSession()
   const [isSubmitLoading, setIsSubmitLoading] = useState(false)
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false)
+  const router = useRouter()
 
   const {
     items: productsInCart,
@@ -72,6 +76,18 @@ export const Cart = () => {
       })
 
       removeAll()
+      toast({
+        title: 'Pedido finalizado com sucesso!',
+        description: 'Você pode acompanhá-lo na tela dos seus pedidos.',
+        action: (
+          <ToastAction
+            altText="Ver pedidos"
+            onClick={() => router.push('/orders')}
+          >
+            Ver pedidos
+          </ToastAction>
+        ),
+      })
     } catch (error) {
       console.log(error)
     } finally {
